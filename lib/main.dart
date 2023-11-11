@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_4u_depd/views/pages/landing.dart';
+import 'package:flutter_4u_depd/views/pages/pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
-      home: LandingPage(),
     );
   }
 }
