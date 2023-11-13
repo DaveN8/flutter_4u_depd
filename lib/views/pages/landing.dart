@@ -103,7 +103,8 @@ class _LandingPageState extends State<LandingPage> {
                 // 4. Products section using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: widget.products
                         .map((product) => _buildProductSection(
                               product['title']!,
