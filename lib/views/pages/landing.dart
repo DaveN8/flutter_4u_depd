@@ -22,7 +22,7 @@ class _LandingPageState extends State<LandingPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: const Color.fromARGB(255,255,253,208), // Example color for navbar
+            backgroundColor: const Color.fromARGB(255, 255, 253, 208), // Example color for navbar
             expandedHeight: 50.0,
             pinned: true, // Make the app bar pinned at the top
             title: Row(
@@ -56,14 +56,23 @@ class _LandingPageState extends State<LandingPage> {
               [
                 // 2. Banner
                 Container(
-                  height: 200,
+                  height: 720,
+                  // height: double.infinity,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/banner_image.jpg'), // Replace with your image
+                      image: AssetImage("images"), 
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Additional banner contents (if any)
+                  // Image Banner
+                  child: Container(
+                      color: Colors.amber,
+                      child: Image.asset(
+                        'images/testimage.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                 ),
 
                 // 3. Explanation about services using dynamic data
