@@ -1,7 +1,7 @@
 part of "pages.dart";
 
 class LandingPage extends StatefulWidget {
-  LandingPage({super.key});
+  LandingPage({Key? key});
 
   final List<Map<String, dynamic>> services = [
     {"image": "affordable.png", "title": "Affordable", "description": "Explanation about affordability"},
@@ -20,10 +20,10 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  TextEditingController _namaPemilikController = TextEditingController();
-  TextEditingController _tempatAcaraController = TextEditingController();
-  TextEditingController _tanggalAcaraController = TextEditingController();
-  TextEditingController _jenisUndanganController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _reviewController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _LandingPageState extends State<LandingPage> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: 320,
+                  height: 720,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -105,7 +105,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
 
-                // 4. Products section using dynamic data
+                // Products section using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
@@ -119,6 +119,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
 
+                // Form section
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -132,9 +133,9 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: _namaPemilikController,
+                        controller: _nameController,
                         decoration: InputDecoration(
-                          labelText: 'Nama Pemilik',
+                          labelText: 'Name',
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromRGBO(255, 244, 224, 1),
@@ -142,9 +143,9 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                       SizedBox(height: 16.0),
                       TextFormField(
-                        controller: _tempatAcaraController,
+                        controller: _emailController,
                         decoration: InputDecoration(
-                          labelText: 'Tempat Acara',
+                          labelText: 'Email',
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromRGBO(255, 244, 224, 1),
@@ -152,9 +153,9 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                       SizedBox(height: 16.0),
                       TextFormField(
-                        controller: _tanggalAcaraController,
+                        controller: _phoneNumberController,
                         decoration: InputDecoration(
-                          labelText: 'Tanggal Acara',
+                          labelText: 'Phone Number',
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromRGBO(255, 244, 224, 1),
@@ -162,15 +163,34 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                       SizedBox(height: 16.0),
                       TextFormField(
-                        controller: _jenisUndanganController,
+                        controller: _reviewController,
+                        maxLines: 4, // Adjust as needed
                         decoration: InputDecoration(
-                          labelText: 'Jenis Undangan (Deskripsikan Acara Anda)',
+                          labelText: 'Review',
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromRGBO(255, 244, 224, 1),
                         ),
                       ),
                       SizedBox(height: 32.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Add the logic for submitting the form here
+                          // You can access the form values using the controllers
+                          String name = _nameController.text;
+                          String email = _emailController.text;
+                          String phoneNumber = _phoneNumberController.text;
+                          String review = _reviewController.text;
+
+                          // Add your logic to handle the form submission
+                          // For example, you can print the values to the console
+                          print('Name: $name');
+                          print('Email: $email');
+                          print('Phone Number: $phoneNumber');
+                          print('Review: $review');
+                        },
+                        child: Text('Submit'),
+                      ),
                     ],
                   ),
                 ),
@@ -223,9 +243,7 @@ class _LandingPageState extends State<LandingPage> {
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            // Add the action you want when the button is pressed,
-            // for example, navigate to another page.
-            // Navigator.pushNamed(context, '/productDetails', arguments: title);
+            // Action saat button di tekan
           },
           child: Text('Learn More'),
         ),
