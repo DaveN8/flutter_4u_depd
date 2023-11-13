@@ -9,7 +9,11 @@ class LandingPage extends StatefulWidget {
     {"image": "reuseable.png", "title": "Reusable", "description": "Explanation about reusability"},
   ];
 
-  final List<String> products = ['Paket 1', 'Paket 2', 'Paket 3'];
+  final List<Map<String, dynamic>> products = [
+    {"title": "Paket 1", "description": "Short description for Paket 1"},
+    {"title": "Paket 2", "description": "Short description for Paket 2"},
+    {"title": "Paket 3", "description": "Short description for Paket 3"},
+  ];
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -59,21 +63,18 @@ class _LandingPageState extends State<LandingPage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images"), // Updated path to assets/images
+                      image: AssetImage("assets/images"),
                       fit: BoxFit.cover,
                     ),
                   ),
                   child: Container(
                     color: Colors.amber,
                     child: Image.asset(
-                      'images/testimage.png', // Updated path to assets/images
+                      'images/testimage.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-
-
-               // 3. Explanation about services using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -100,17 +101,18 @@ class _LandingPageState extends State<LandingPage> {
                 ),
 
                 // 4. Products section using dynamic data
-                Container(
-                  height: 200,
-                  color: Colors.grey,
-                  child: Row(
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
                     children: widget.products
-                        .map((product) => Expanded(child: _buildProduct(product)))
+                        .map((product) => _buildProductSection(
+                              product['title']!,
+                              product['description']!,
+                            ))
                         .toList(),
                   ),
                 ),
 
-                // 5. Form section
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -143,14 +145,12 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-
-// Function to create service sections
   Widget _buildServiceSection(String image, String title, String description) {
     return Expanded(
       child: Column(
         children: [
           Image.asset(
-            'images/$image', // directory untuk mengambil image yg sudah di copas
+            'images/$image',
             width: 80,
             height: 80,
           ),
@@ -169,18 +169,30 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  // Function to create product sections
-  Widget _buildProduct(String title) {
-    return Container(
-      child: Center(
-        child: Text(
+  // Function to create product sections with buttons
+  Widget _buildProductSection(String title, String description) {
+    return Column(
+      children: [
+        SizedBox(height: 20),
+        Text(
           title,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
+        SizedBox(height: 10),
+        Text(description),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            // Add the action you want when the button is pressed,
+            // for example, navigate to another page.
+            // Navigator.pushNamed(context, '/productDetails', arguments: title);
+          },
+          child: Text('Learn More'),
+        ),
+      ],
     );
   }
 }
