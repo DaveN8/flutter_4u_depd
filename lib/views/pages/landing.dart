@@ -1,5 +1,6 @@
 part of "pages.dart";
 
+
 class LandingPage extends StatefulWidget {
   LandingPage({Key? key});
 
@@ -178,6 +179,14 @@ class _LandingPageState extends State<LandingPage> {
                             filled: true,
                             fillColor: Color.fromRGBO(255, 244, 224, 1),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your phone number';
+                            } else if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                              return 'Input a valid phone number (only numbers)';
+                            }
+                            return null;
+                          },
                         ),
                         SizedBox(height: 16.0),
                         TextFormField(
@@ -265,7 +274,7 @@ class _LandingPageState extends State<LandingPage> {
           onPressed: () {
             // Action saat button di tekan
           },
-          child: Text('Order Paket'),
+          child: Text('Learn More'),
         ),
       ],
     );
