@@ -22,7 +22,7 @@ class _LandingPageState extends State<LandingPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.blue, // Example color for navbar
+            backgroundColor: const Color.fromARGB(255,255,253,208), // Example color for navbar
             expandedHeight: 50.0,
             pinned: true, // Make the app bar pinned at the top
             title: Row(
@@ -44,7 +44,7 @@ class _LandingPageState extends State<LandingPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white, // Adjust color as needed
+                      color: const Color.fromARGB(255, 0, 0, 0), // Adjust color as needed
                     ),
                   ),
                 ),
