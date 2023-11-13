@@ -265,7 +265,7 @@ class _LandingPageState extends State<LandingPage> {
           onPressed: () {
             // Action saat button di tekan
           },
-          child: Text('Learn More'),
+          child: Text('Order Paket'),
         ),
       ],
     );
