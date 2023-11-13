@@ -20,6 +20,11 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  TextEditingController _namaPemilikController = TextEditingController();
+  TextEditingController _tempatAcaraController = TextEditingController();
+  TextEditingController _tanggalAcaraController = TextEditingController();
+  TextEditingController _jenisUndanganController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,14 +132,45 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Name'),
+                        controller: _namaPemilikController,
+                        decoration: InputDecoration(
+                          labelText: 'Nama Pemilik',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
+                      SizedBox(height: 16.0),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Email'),
+                        controller: _tempatAcaraController,
+                        decoration: InputDecoration(
+                          labelText: 'Tempat Acara',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
+                      SizedBox(height: 16.0),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Telephone Number'),
+                        controller: _tanggalAcaraController,
+                        decoration: InputDecoration(
+                          labelText: 'Tanggal Acara',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: _jenisUndanganController,
+                        decoration: InputDecoration(
+                          labelText: 'Jenis Undangan (Deskripsikan Acara Anda)',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
+                      ),
+                      SizedBox(height: 32.0),
                     ],
                   ),
                 ),
