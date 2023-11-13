@@ -20,6 +20,8 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
@@ -122,76 +124,95 @@ class _LandingPageState extends State<LandingPage> {
                 // Form section
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Fill in the Form',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                  child: Form(
+                    key: _formKey, // Set the key for the form
+                    child: Column(
+                      children: [
+                        Text(
+                          'Fill in the Form',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 244, 224, 1),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        SizedBox(height: 16.0),
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 244, 224, 1),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email address';
+                            } else if (!EmailValidator.validate(value)) {
+                              return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _phoneNumberController,
-                        decoration: InputDecoration(
-                          labelText: 'Phone Number',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        SizedBox(height: 16.0),
+                        TextFormField(
+                          controller: _phoneNumberController,
+                          decoration: InputDecoration(
+                            labelText: 'Phone Number',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 244, 224, 1),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _reviewController,
-                        maxLines: 4, // Adjust as needed
-                        decoration: InputDecoration(
-                          labelText: 'Review',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        SizedBox(height: 16.0),
+                        TextFormField(
+                          controller: _reviewController,
+                          maxLines: 4,
+                          decoration: InputDecoration(
+                            labelText: 'Review',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Color.fromRGBO(255, 244, 224, 1),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 32.0),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Add the logic for submitting the form here
-                          // You can access the form values using the controllers
-                          String name = _nameController.text;
-                          String email = _emailController.text;
-                          String phoneNumber = _phoneNumberController.text;
-                          String review = _reviewController.text;
+                        SizedBox(height: 32.0),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Validate the form before submission
+                            if (_formKey.currentState!.validate()) {
+                              // If the form is valid, proceed with submission
+                              String name = _nameController.text;
+                              String email = _emailController.text;
+                              String phoneNumber = _phoneNumberController.text;
+                              String review = _reviewController.text;
 
-                          // Add your logic to handle the form submission
-                          // For example, you can print the values to the console
-                          print('Name: $name');
-                          print('Email: $email');
-                          print('Phone Number: $phoneNumber');
-                          print('Review: $review');
-                        },
-                        child: Text('Submit'),
-                      ),
-                    ],
+                              // Add your logic to handle the form submission
+                              // For example, you can print the values to the console
+                              print('Name: $name');
+                              print('Email: $email');
+                              print('Phone Number: $phoneNumber');
+                              print('Review: $review');
+                            }
+                          },
+                          child: Text('Submit'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -226,7 +247,6 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  // Function to create product sections with buttons
   Widget _buildProductSection(String title, String description) {
     return Column(
       children: [
