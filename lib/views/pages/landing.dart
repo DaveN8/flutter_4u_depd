@@ -3,36 +3,45 @@ part of "pages.dart";
 class LandingPage extends StatefulWidget {
   LandingPage({super.key});
 
-  final List<Map<String, String>> services = [
-    {"title": "Affordable", "description": "Explanation about affordability"},
-    {"title": "Customizable", "description": "Explanation about customization"},
-    {"title": "Reusable", "description": "Explanation about reusability"},
+  final List<Map<String, dynamic>> services = [
+    {"image": "affordable.png", "title": "Affordable", "description": "Explanation about affordability"},
+    {"image": "customizeable.png", "title": "Customizable", "description": "Explanation about customization"},
+    {"image": "reuseable.png", "title": "Reusable", "description": "Explanation about reusability"},
   ];
 
-  final List<String> products = ['Paket 1', 'Paket 2', 'Paket 3'];
+  final List<Map<String, dynamic>> products = [
+    {"title": "Paket 1", "description": "Short description for Paket 1"},
+    {"title": "Paket 2", "description": "Short description for Paket 2"},
+    {"title": "Paket 3", "description": "Short description for Paket 3"},
+  ];
 
   @override
   State<LandingPage> createState() => _LandingPageState();
 }
 
 class _LandingPageState extends State<LandingPage> {
+  TextEditingController _namaPemilikController = TextEditingController();
+  TextEditingController _tempatAcaraController = TextEditingController();
+  TextEditingController _tanggalAcaraController = TextEditingController();
+  TextEditingController _jenisUndanganController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: const Color.fromARGB(255,255,253,208), // Example color for navbar
+            backgroundColor: const Color.fromARGB(255, 255, 253, 208),
             expandedHeight: 50.0,
-            pinned: true, // Make the app bar pinned at the top
+            pinned: true,
             title: Row(
               children: [
                 Image.asset(
                   'images/logodei.jpg',
-                  width: 40, // Adjust width as needed
-                  height: 40, // Adjust height as needed
+                  width: 40,
+                  height: 40,
                 ),
-                SizedBox(width: 10), // Add spacing between logo and "4U" title
+                SizedBox(width: 10),
                 GestureDetector(
                   onTap: () {
                     // Add the action you want when the "4U" title is tapped,
@@ -44,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 0, 0, 0), // Adjust color as needed
+                      color: const Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                 ),
@@ -54,19 +63,23 @@ class _LandingPageState extends State<LandingPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                // 2. Banner
                 Container(
-                  height: 200,
+                  height: 320,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/banner_image.jpg'), // Replace with your image
+                      image: AssetImage("assets/images"),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Additional banner contents (if any)
+                  child: Container(
+                    color: Colors.amber,
+                    child: Image.asset(
+                      'images/testimage.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-
-                // 3. Explanation about services using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -79,11 +92,13 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      // Display services dynamically
                       Row(
                         children: widget.services
-                            .map((services) => _buildServiceSection(
-                                services['title']!, services['description']!))
+                            .map((service) => _buildServiceSection(
+                                  service['image']!,
+                                  service['title']!,
+                                  service['description']!,
+                                ))
                             .toList(),
                       ),
                     ],
@@ -91,17 +106,19 @@ class _LandingPageState extends State<LandingPage> {
                 ),
 
                 // 4. Products section using dynamic data
-                Container(
-                  height: 200, // Adjust height as needed
-                  color: Colors.grey, // Example color for product section
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: widget.products
-                        .map((product) => Expanded(child: _buildProduct(product)))
+                        .map((product) => _buildProductSection(
+                              product['title']!,
+                              product['description']!,
+                            ))
                         .toList(),
                   ),
                 ),
 
-                // 5. Form section
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -114,17 +131,46 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      // Form fields for name, email, and telephone number
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Name'),
+                        controller: _namaPemilikController,
+                        decoration: InputDecoration(
+                          labelText: 'Nama Pemilik',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
+                      SizedBox(height: 16.0),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Email'),
+                        controller: _tempatAcaraController,
+                        decoration: InputDecoration(
+                          labelText: 'Tempat Acara',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
+                      SizedBox(height: 16.0),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Telephone Number'),
+                        controller: _tanggalAcaraController,
+                        decoration: InputDecoration(
+                          labelText: 'Tanggal Acara',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
                       ),
-                      // Additional form submission button or action
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: _jenisUndanganController,
+                        decoration: InputDecoration(
+                          labelText: 'Jenis Undangan (Deskripsikan Acara Anda)',
+                          border: OutlineInputBorder(),
+                          filled: true,
+                          fillColor: Color.fromRGBO(255, 244, 224, 1),
+                        ),
+                      ),
+                      SizedBox(height: 32.0),
                     ],
                   ),
                 ),
@@ -136,11 +182,16 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  // Function to create service sections
-  Widget _buildServiceSection(String title, String description) {
+  Widget _buildServiceSection(String image, String title, String description) {
     return Expanded(
       child: Column(
         children: [
+          Image.asset(
+            'images/$image',
+            width: 80,
+            height: 80,
+          ),
+          SizedBox(height: 10),
           Text(
             title,
             style: TextStyle(
@@ -155,18 +206,30 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  // Function to create product sections
-  Widget _buildProduct(String title) {
-    return Container(
-      child: Center(
-        child: Text(
+  // Function to create product sections with buttons
+  Widget _buildProductSection(String title, String description) {
+    return Column(
+      children: [
+        SizedBox(height: 20),
+        Text(
           title,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
+        SizedBox(height: 10),
+        Text(description),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            // Add the action you want when the button is pressed,
+            // for example, navigate to another page.
+            // Navigator.pushNamed(context, '/productDetails', arguments: title);
+          },
+          child: Text('Learn More'),
+        ),
+      ],
     );
   }
 }
