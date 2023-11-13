@@ -3,10 +3,10 @@ part of "pages.dart";
 class LandingPage extends StatefulWidget {
   LandingPage({super.key});
 
-  final List<Map<String, String>> services = [
-    {"title": "Affordable", "description": "Explanation about affordability"},
-    {"title": "Customizable", "description": "Explanation about customization"},
-    {"title": "Reusable", "description": "Explanation about reusability"},
+  final List<Map<String, dynamic>> services = [
+    {"image": "affordable.png", "title": "Affordable", "description": "Explanation about affordability"},
+    {"image": "customizeable.png", "title": "Customizable", "description": "Explanation about customization"},
+    {"image": "reuseable.png", "title": "Reusable", "description": "Explanation about reusability"},
   ];
 
   final List<String> products = ['Paket 1', 'Paket 2', 'Paket 3'];
@@ -22,17 +22,17 @@ class _LandingPageState extends State<LandingPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: const Color.fromARGB(255, 255, 253, 208), // Example color for navbar
+            backgroundColor: const Color.fromARGB(255, 255, 253, 208),
             expandedHeight: 50.0,
-            pinned: true, // Make the app bar pinned at the top
+            pinned: true,
             title: Row(
               children: [
                 Image.asset(
                   'images/logodei.jpg',
-                  width: 40, // Adjust width as needed
-                  height: 40, // Adjust height as needed
+                  width: 40,
+                  height: 40,
                 ),
-                SizedBox(width: 10), // Add spacing between logo and "4U" title
+                SizedBox(width: 10),
                 GestureDetector(
                   onTap: () {
                     // Add the action you want when the "4U" title is tapped,
@@ -44,7 +44,7 @@ class _LandingPageState extends State<LandingPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 0, 0, 0), // Adjust color as needed
+                      color: const Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                 ),
@@ -54,28 +54,26 @@ class _LandingPageState extends State<LandingPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                // 2. Banner
                 Container(
-                  height: 720,
-                  // height: double.infinity,
+                  height: 320,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images"), 
+                      image: AssetImage("assets/images"), // Updated path to assets/images
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Image Banner
                   child: Container(
-                      color: Colors.amber,
-                      child: Image.asset(
-                        'images/testimage.png',
-                        fit: BoxFit.cover,
-                      ),
+                    color: Colors.amber,
+                    child: Image.asset(
+                      'images/testimage.png', // Updated path to assets/images
+                      fit: BoxFit.cover,
                     ),
+                  ),
                 ),
 
-                // 3. Explanation about services using dynamic data
+
+               // 3. Explanation about services using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -88,11 +86,13 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      // Display services dynamically
                       Row(
                         children: widget.services
-                            .map((services) => _buildServiceSection(
-                                services['title']!, services['description']!))
+                            .map((service) => _buildServiceSection(
+                                  service['image']!,
+                                  service['title']!,
+                                  service['description']!,
+                                ))
                             .toList(),
                       ),
                     ],
@@ -101,8 +101,8 @@ class _LandingPageState extends State<LandingPage> {
 
                 // 4. Products section using dynamic data
                 Container(
-                  height: 200, // Adjust height as needed
-                  color: Colors.grey, // Example color for product section
+                  height: 200,
+                  color: Colors.grey,
                   child: Row(
                     children: widget.products
                         .map((product) => Expanded(child: _buildProduct(product)))
@@ -123,7 +123,6 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      // Form fields for name, email, and telephone number
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Name'),
                       ),
@@ -133,7 +132,6 @@ class _LandingPageState extends State<LandingPage> {
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Telephone Number'),
                       ),
-                      // Additional form submission button or action
                     ],
                   ),
                 ),
@@ -145,11 +143,18 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  // Function to create service sections
-  Widget _buildServiceSection(String title, String description) {
+
+// Function to create service sections
+  Widget _buildServiceSection(String image, String title, String description) {
     return Expanded(
       child: Column(
         children: [
+          Image.asset(
+            'images/$image', // directory untuk mengambil image yg sudah di copas
+            width: 80,
+            height: 80,
+          ),
+          SizedBox(height: 10),
           Text(
             title,
             style: TextStyle(
