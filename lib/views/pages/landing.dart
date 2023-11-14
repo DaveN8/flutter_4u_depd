@@ -92,8 +92,10 @@ class _LandingPageState extends State<LandingPage> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(255, 94, 92, 72), // Starting color
-                                Color.fromARGB(255, 255, 253, 208), // Ending color
+                                Color.fromARGB(
+                                    255, 94, 92, 72), // Starting color
+                                Color.fromARGB(
+                                    255, 255, 253, 208), // Ending color
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -146,7 +148,9 @@ class _LandingPageState extends State<LandingPage> {
                               ),
                               SizedBox(height: 10),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal:20), // Add padding to the description text
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        20), // Add padding to the description text
                                 child: Text(
                                   'For you adalah bisnis undangan digital yang menawarkan layanan pembuatan undangan digital yang praktis, cepat, dan menarik. Bisnis ini memiliki platform online yang mudah digunakan dengan berbagai pilihan template dan desain yang dapat disesuaikan dengan kebutuhan dan selera pelanggan. Foryou juga menyediakan fitur interaktif seperti RSVP online dan tampilan galeri foto, sehingga undangan digital menjadi modern dan ramah lingkungan. Dengan layanan yang efisien dan berkualitas, Foryou merupakan pilihan yang sempurna bagi mereka yang ingin membuat undangan digital yang elegan dan mudah dibagikan kepada tamu undangan mereka.',
                                   style: TextStyle(
@@ -376,11 +380,19 @@ class _LandingPageState extends State<LandingPage> {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            // Action saat button di tekan
+            _launchURL('https://formfacade.com/sm/HMYxoxFEr');
           },
           child: const Text('Learn More'),
         ),
       ],
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
