@@ -79,12 +79,8 @@ class _LandingPageState extends State<LandingPage> {
               [
                 //2. Banner Image
                 Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images"),
-                      fit: BoxFit.contain,
-                      alignment: Alignment.center,
-                    ),
+                  decoration: const BoxDecoration(
+                    color: Colors.amber,
                   ),
                   child: Stack(
                     children: [
@@ -93,35 +89,99 @@ class _LandingPageState extends State<LandingPage> {
                         child: Container(
                           height: 720,
                           width: double.infinity,
-                          color: Colors.amber,
-                          child: Image.asset(
-                            'images/banner4u.png',
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                          ),
-                        ),
-                      ),
-                      // Rounded Rectangle with Welcome Message
-                      Positioned(
-                        left: 180,
-                        right: 180,
-                        top: 150,
-                        bottom: 150,
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(150, 255, 253, 208),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Text(
-                            'Welcome to 4U',
-                            style: TextStyle(
-                              fontSize: 48,
-                              fontWeight: FontWeight.bold,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(255, 94, 92, 72), // Starting color
+                                Color.fromARGB(255, 255, 253, 208), // Ending color
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp,
                             ),
                           ),
                         ),
                       ),
+
+                      //edit tampilan contoh pada Wix
+                      // banner foto
+                      Positioned(
+                        left: 160,
+                        top: 100,
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          width: 720,
+                          height: 400,
+                          child: Image.asset(
+                            'images/banner4u.png',
+                            fit: BoxFit.fill,
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                      ),
+                      //banner welcome
+                      Positioned(
+                        left: 650,
+                        right: 180,
+                        top: 300,
+                        bottom: 100,
+                        child: Container(
+                          padding: EdgeInsets.all(
+                              20), // Add padding to the whole container
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(250, 255, 253, 208),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Welcome to 4U',
+                                style: TextStyle(
+                                  fontSize: 48,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal:20), // Add padding to the description text
+                                child: Text(
+                                  'For you adalah bisnis undangan digital yang menawarkan layanan pembuatan undangan digital yang praktis, cepat, dan menarik. Bisnis ini memiliki platform online yang mudah digunakan dengan berbagai pilihan template dan desain yang dapat disesuaikan dengan kebutuhan dan selera pelanggan. Foryou juga menyediakan fitur interaktif seperti RSVP online dan tampilan galeri foto, sehingga undangan digital menjadi modern dan ramah lingkungan. Dengan layanan yang efisien dan berkualitas, Foryou merupakan pilihan yang sempurna bagi mereka yang ingin membuat undangan digital yang elegan dan mudah dibagikan kepada tamu undangan mereka.',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // Rounded Rectangle + Welcome to 4U
+                      // Positioned(
+                      //   left: 180,
+                      //   right: 180,
+                      //   top: 150,
+                      //   bottom: 150,
+                      //   child: Container(
+                      //     alignment: Alignment.center,
+                      //     decoration: BoxDecoration(
+                      //       color: Color.fromARGB(150, 255, 253, 208),
+                      //       borderRadius: BorderRadius.circular(16),
+                      //     ),
+                      //     child: Text(
+                      //       'Welcome to 4U',
+                      //       style: TextStyle(
+                      //         fontSize: 48,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -131,14 +191,14 @@ class _LandingPageState extends State<LandingPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Our Services',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         children: widget.services
                             .map((service) => _buildServiceSection(
@@ -173,17 +233,17 @@ class _LandingPageState extends State<LandingPage> {
                     key: _formKey, // Set the key for the form
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Fill in the Form',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: _nameController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Name',
                             border: OutlineInputBorder(),
                             filled: true,
