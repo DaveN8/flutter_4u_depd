@@ -1,13 +1,24 @@
 part of "pages.dart";
 
-
 class LandingPage extends StatefulWidget {
   LandingPage({Key? key});
 
   final List<Map<String, dynamic>> services = [
-    {"image": "affordable.png", "title": "Affordable", "description": "Explanation about affordability"},
-    {"image": "customizeable.png", "title": "Customizable", "description": "Explanation about customization"},
-    {"image": "reuseable.png", "title": "Reusable", "description": "Explanation about reusability"},
+    {
+      "image": "affordable.png",
+      "title": "Affordable",
+      "description": "Explanation about affordability"
+    },
+    {
+      "image": "customizeable.png",
+      "title": "Customizable",
+      "description": "Explanation about customization"
+    },
+    {
+      "image": "reuseable.png",
+      "title": "Reusable",
+      "description": "Explanation about reusability"
+    },
   ];
 
   final List<Map<String, dynamic>> products = [
@@ -66,23 +77,56 @@ class _LandingPageState extends State<LandingPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                //2. Banner Image
                 Container(
-                  height: 720,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images"),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
                     ),
                   ),
-                  child: Container(
-                    color: Colors.amber,
-                    child: Image.asset(
-                      'images/testimage.png',
-                      fit: BoxFit.cover,
-                    ),
+                  child: Stack(
+                    children: [
+                      // Banner Image
+                      Center(
+                        child: Container(
+                          height: 720,
+                          width: double.infinity,
+                          color: Colors.amber,
+                          child: Image.asset(
+                            'images/banner4u.png',
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                      ),
+                      // Rounded Rectangle with Welcome Message
+                      Positioned(
+                        left: 180,
+                        right: 180,
+                        top: 150,
+                        bottom: 150,
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(150, 255, 253, 208),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Text(
+                            'Welcome to 4U',
+                            style: TextStyle(
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+
+                // 3. Our Services
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -108,7 +152,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
 
-                // Products section using dynamic data
+                // 4. Products section using dynamic data
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
@@ -122,7 +166,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
 
-                // Form section
+                // 5. Form section
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
