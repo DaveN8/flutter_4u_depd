@@ -55,19 +55,19 @@ class _LandingPageState extends State<LandingPage> {
                   width: 40,
                   height: 40,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () {
                     // Add the action you want when the "4U" title is tapped,
                     // for example, navigate to the homepage.
                     // Navigator.pushNamed(context, '/homepage'); // Example navigation
                   },
-                  child: Text(
+                  child: const Text(
                     '4U',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 0, 0, 0),
+                      color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _LandingPageState extends State<LandingPage> {
                         top: 300,
                         bottom: 100,
                         child: Container(
-                          padding: EdgeInsets.all(
+                          padding: const EdgeInsets.all(
                               20), // Add padding to the whole container
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
@@ -230,7 +230,7 @@ class _LandingPageState extends State<LandingPage> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
-                    key: _formKey, // Set the key for the form
+                    key: _formKey,
                     child: Column(
                       children: [
                         const Text(
@@ -256,10 +256,10 @@ class _LandingPageState extends State<LandingPage> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         TextFormField(
                           controller: _emailController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Email',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -274,10 +274,10 @@ class _LandingPageState extends State<LandingPage> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         TextFormField(
                           controller: _phoneNumberController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Phone Number',
                             border: OutlineInputBorder(),
                             filled: true,
@@ -292,18 +292,18 @@ class _LandingPageState extends State<LandingPage> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         TextFormField(
                           controller: _reviewController,
                           maxLines: 4,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Review',
                             border: OutlineInputBorder(),
                             filled: true,
                             fillColor: Color.fromRGBO(255, 244, 224, 1),
                           ),
                         ),
-                        SizedBox(height: 32.0),
+                        const SizedBox(height: 32.0),
                         ElevatedButton(
                           onPressed: () {
                             // Validate the form before submission
@@ -322,7 +322,7 @@ class _LandingPageState extends State<LandingPage> {
                               print('Review: $review');
                             }
                           },
-                          child: Text('Submit'),
+                          child: const Text('Submit'),
                         ),
                       ],
                     ),
@@ -345,10 +345,10 @@ class _LandingPageState extends State<LandingPage> {
             width: 80,
             height: 80,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -363,22 +363,22 @@ class _LandingPageState extends State<LandingPage> {
   Widget _buildProductSection(String title, String description) {
     return Column(
       children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(description),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
             // Action saat button di tekan
           },
-          child: Text('Learn More'),
+          child: const Text('Learn More'),
         ),
       ],
     );
