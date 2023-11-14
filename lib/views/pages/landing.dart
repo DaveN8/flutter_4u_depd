@@ -364,7 +364,7 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  Widget _buildProductSection(String title, String description) {
+Widget _buildProductSection(String title, String description) {
   return Column(
     children: [
       const SizedBox(height: 20),
