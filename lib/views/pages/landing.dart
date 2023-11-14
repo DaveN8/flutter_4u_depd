@@ -108,7 +108,6 @@ class _LandingPageState extends State<LandingPage> {
                         top: 150,
                         bottom: 150,
                         child: Container(
-                          padding: EdgeInsets.all(140),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(150, 255, 253, 208),
