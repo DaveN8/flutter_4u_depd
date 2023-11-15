@@ -231,104 +231,143 @@ class _LandingPageState extends State<LandingPage> {
                 ),
 
                 // 5. Form section
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Fill in the Form',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                // 5. Form section
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 50, bottom: 30, left: 20, right: 20),
+                    child: Container(
+                      width: 1000, // Adjust the width as needed
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(150, 255, 253, 208),
+                            Color.fromARGB(150, 94, 92, 72),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp,
                         ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          controller: _nameController,
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Color.fromRGBO(255, 244, 224, 1),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your full name';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16.0),
-                        TextFormField(
-                          controller: _emailController,
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Color.fromRGBO(255, 244, 224, 1),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email address';
-                            } else if (!EmailValidator.validate(value)) {
-                              return 'Please enter a valid email address';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16.0),
-                        TextFormField(
-                          controller: _phoneNumberController,
-                          decoration: const InputDecoration(
-                            labelText: 'Phone Number',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Color.fromRGBO(255, 244, 224, 1),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your phone number';
-                            } else if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
-                              return 'Input a valid phone number (only numbers)';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 16.0),
-                        TextFormField(
-                          controller: _reviewController,
-                          maxLines: 4,
-                          decoration: const InputDecoration(
-                            labelText: 'Review',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Color.fromRGBO(255, 244, 224, 1),
-                          ),
-                        ),
-                        const SizedBox(height: 32.0),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Validate the form before submission
-                            if (_formKey.currentState!.validate()) {
-                              // If the form is valid, proceed with submission
-                              String name = _nameController.text;
-                              String email = _emailController.text;
-                              String phoneNumber = _phoneNumberController.text;
-                              String review = _reviewController.text;
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text(
+                                  'Review Form',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _nameController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Name',
+                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(255, 244, 224, 1),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your full name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _emailController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Email',
+                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(255, 244, 224, 1),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your email address';
+                                  } else if (!EmailValidator.validate(value)) {
+                                    return 'Please enter a valid email address';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _phoneNumberController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Phone Number',
+                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(255, 244, 224, 1),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your phone number';
+                                  } else if (!RegExp(r'^[0-9]*$')
+                                      .hasMatch(value)) {
+                                    return 'Input a valid phone number (only numbers)';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _reviewController,
+                                maxLines: 4,
+                                decoration: const InputDecoration(
+                                  labelText: 'Review',
+                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(255, 244, 224, 1),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 32.0),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Validate the form before submission
+                                  if (_formKey.currentState!.validate()) {
+                                    // If the form is valid, proceed with submission
+                                    String name = _nameController.text;
+                                    String email = _emailController.text;
+                                    String phoneNumber = _phoneNumberController.text;
+                                    String review = _reviewController.text;
 
-                              // Add your logic to handle the form submission
-                              // For example, you can print the values to the console
-                              print('Name: $name');
-                              print('Email: $email');
-                              print('Phone Number: $phoneNumber');
-                              print('Review: $review');
-                            }
-                          },
-                          child: const Text('Submit'),
+                                    // Add your logic to handle the form submission
+                                    // For example, you can print the values to the console
+                                    print('Name: $name');
+                                    print('Email: $email');
+                                    print('Phone Number: $phoneNumber');
+                                    print('Review: $review');
+                                  }
+                                },
+                                child: const Text('Submit'),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -364,35 +403,35 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-Widget _buildProductSection(String title, String description) {
-  return Column(
-    children: [
-      const SizedBox(height: 20),
-      Text(
-        title,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+  Widget _buildProductSection(String title, String description) {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      const SizedBox(height: 10),
-      Text(description),
-      const SizedBox(height: 20),
-      ElevatedButton(
-        onPressed: () {
-          _launchURL('https://formfacade.com/sm/HMYxoxFEr');
-        },
-        child: const Text('Learn More'),
-      ),
-    ],
-  );
-}
-
-void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+        const SizedBox(height: 10),
+        Text(description),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            _launchURL('https://formfacade.com/sm/HMYxoxFEr');
+          },
+          child: const Text('Learn More'),
+        ),
+      ],
+    );
   }
-}
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
