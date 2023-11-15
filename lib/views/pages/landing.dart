@@ -232,13 +232,13 @@ class _LandingPageState extends State<LandingPage> {
 
                 // 5. Form section
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left: 250,right: 250,bottom: 20,top: 40),
                   child: Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         const Text(
-                          'Fill in the Form',
+                          'Review Form',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -364,35 +364,35 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-Widget _buildProductSection(String title, String description) {
-  return Column(
-    children: [
-      const SizedBox(height: 20),
-      Text(
-        title,
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+  Widget _buildProductSection(String title, String description) {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      const SizedBox(height: 10),
-      Text(description),
-      const SizedBox(height: 20),
-      ElevatedButton(
-        onPressed: () {
-          _launchURL('https://formfacade.com/sm/HMYxoxFEr');
-        },
-        child: const Text('Learn More'),
-      ),
-    ],
-  );
-}
-
-void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+        const SizedBox(height: 10),
+        Text(description),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            _launchURL('https://formfacade.com/sm/HMYxoxFEr');
+          },
+          child: const Text('Learn More'),
+        ),
+      ],
+    );
   }
-}
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
