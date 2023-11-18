@@ -3,7 +3,6 @@ import 'package:flutter_4u_depd/views/widgets/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:overlapped_carousel/overlapped_carousel.dart';
 import 'dart:math';
 
 

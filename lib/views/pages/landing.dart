@@ -49,10 +49,9 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          //1. Navbar
           SliverAppBar(
-            backgroundColor: const Color.fromARGB(255, 255, 253, 208),
-            expandedHeight: 50.0,
-            pinned: true,
+            // ... (your existing code)
             title: Row(
               children: [
                 Image.asset(
@@ -71,6 +70,25 @@ class _LandingPageState extends State<LandingPage> {
                     '4U',
                     style: TextStyle(
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
+                ),
+                // Add the login button to the top right corner
+                const Spacer(), // Push the login button to the right
+                TextButton(
+                  onPressed: () {
+                    // Navigate to the login page when the button is pressed
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
@@ -97,7 +115,7 @@ class _LandingPageState extends State<LandingPage> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(255, 202, 198, 127), // Starting color
+                                Color.fromARGB(255, 202, 245, 192), // Starting color
                                 Color.fromARGB(
                                     255, 255, 253, 208), // Ending color
                               ],
@@ -289,61 +307,71 @@ class _LandingPageState extends State<LandingPage> {
                 ),
 
                 // 5. Carousel Image (gambar overlap)
-                Column(
-                  children: [
-                    // Add product example title
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Product Example Title',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      colors: [
+                        Colors.yellow.shade100, // Light yellow color
+                        Color.fromARGB(255, 250, 255, 230), // White color
+                      ],
+                      radius: 2,
+                      stops: [0.0, 1.0],
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      // Add product example title
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Product Example',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: SizedBox(
-                        height: min(
-                          MediaQuery.of(context).size.width / 3.3 * (4 / 3),
-                          MediaQuery.of(context).size.height * 0.9,
-                        ),
-                        child: CarouselSlider.builder(
-                          itemCount: 3,
-                          options: CarouselOptions(
-                            height: min(
-                              MediaQuery.of(context).size.width /
-                                  3.3 *
-                                  (16 / 9),
-                              MediaQuery.of(context).size.height * 0.9,
+                      Center(
+                        child: SizedBox(
+                          height: min(
+                            MediaQuery.of(context).size.width,
+                            MediaQuery.of(context).size.height * 0.9,
+                          ),
+                          child: CarouselSlider.builder(
+                            itemCount: 3,
+                            options: CarouselOptions(
+                              height: min(
+                                MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height * 0.9,
+                              ),
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              aspectRatio: 2.0,
+                              autoPlayInterval: Duration(seconds: 3),
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  currentIndex = index;
+                                });
+                              },
                             ),
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            aspectRatio: 2.0,
-                            autoPlayInterval: Duration(seconds: 3),
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                currentIndex = index;
-                              });
+                            itemBuilder: (context, index, realIndex) {
+                              return ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(5.0),
+                                ),
+                                child: Image.asset(
+                                  'images/$index.png', // Adjust the image path accordingly
+                                  fit: BoxFit.cover,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height,
+                                ),
+                              );
                             },
                           ),
-                          itemBuilder: (context, index, realIndex) {
-                            return ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                              child: Image.asset(
-                                'images/$index.jpg', // Adjust the image path accordingly
-                                fit: BoxFit.cover,
-                                width: MediaQuery.of(context).size.width * 20/100,
-                                height: MediaQuery.of(context).size.height * 20/100,
-                              ),
-                            );
-                          },
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
 
                 // 6. Form section
