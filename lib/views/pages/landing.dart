@@ -42,6 +42,8 @@ class _LandingPageState extends State<LandingPage> {
   TextEditingController _phoneNumberController = TextEditingController();
   TextEditingController _reviewController = TextEditingController();
 
+  int currentIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,8 +97,7 @@ class _LandingPageState extends State<LandingPage> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(
-                                    255, 94, 92, 72), // Starting color
+                                Color.fromARGB(255, 202, 198, 127), // Starting color
                                 Color.fromARGB(
                                     255, 255, 253, 208), // Ending color
                               ],
@@ -136,7 +137,7 @@ class _LandingPageState extends State<LandingPage> {
                               20), // Add padding to the whole container
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(250, 255, 253, 208),
+                            color: Color.fromARGB(249, 223, 221, 184),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: const Column(
@@ -197,7 +198,7 @@ class _LandingPageState extends State<LandingPage> {
                 Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Container(
-                    color: Color.fromARGB(250, 255, 253, 208),
+                    color: Color.fromARGB(248, 233, 233, 224),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -217,8 +218,8 @@ class _LandingPageState extends State<LandingPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: widget.services
                               .map((service) => Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 30),
                                     child: Column(
                                       children: [
                                         Container(
@@ -257,27 +258,95 @@ class _LandingPageState extends State<LandingPage> {
                 ),
 
                 // 4. Products section using dynamic data
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: widget.products
-                        .asMap()
-                        .entries
-                        .map(
-                          (entry) => _buildProductSection(
-                            entry.value['title']!,
-                            entry.value['description']!,
-                            'paket${entry.key + 1}.png', // Adjust the image path accordingly
-                            400.0, // Customize the image size for each package
-                          ),
-                        )
-                        .toList(),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 680.0,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 2.0,
+                    autoPlayInterval: Duration(seconds: 3),
                   ),
+                  items: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: widget.products
+                            .asMap()
+                            .entries
+                            .map(
+                              (entry) => _buildProductSection(
+                                entry.value['title']!,
+                                entry.value['description']!,
+                                'paket${entry.key + 1}.png', // Adjust the image path accordingly
+                                400.0, // Customize the image size for each package
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
                 ),
 
-                // 5. Form section
-                // 5. Form section
+                // 5. Carousel Image (gambar overlap)
+                Column(
+                  children: [
+                    // Add product example title
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Product Example Title',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        height: min(
+                          MediaQuery.of(context).size.width / 3.3 * (4 / 3),
+                          MediaQuery.of(context).size.height * 0.9,
+                        ),
+                        child: CarouselSlider.builder(
+                          itemCount: 3,
+                          options: CarouselOptions(
+                            height: min(
+                              MediaQuery.of(context).size.width /
+                                  3.3 *
+                                  (16 / 9),
+                              MediaQuery.of(context).size.height * 0.9,
+                            ),
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            aspectRatio: 2.0,
+                            autoPlayInterval: Duration(seconds: 3),
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                currentIndex = index;
+                              });
+                            },
+                          ),
+                          itemBuilder: (context, index, realIndex) {
+                            return ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5.0),
+                              ),
+                              child: Image.asset(
+                                'images/$index.jpg', // Adjust the image path accordingly
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width * 20/100,
+                                height: MediaQuery.of(context).size.height * 20/100,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // 6. Form section
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(
