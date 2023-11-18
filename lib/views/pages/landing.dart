@@ -335,14 +335,14 @@ class _LandingPageState extends State<LandingPage> {
                         child: SizedBox(
                           height: min(
                             MediaQuery.of(context).size.width,
-                            MediaQuery.of(context).size.height * 0.9,
+                            MediaQuery.of(context).size.height * 0.7,
                           ),
                           child: CarouselSlider.builder(
                             itemCount: 3,
                             options: CarouselOptions(
                               height: min(
                                 MediaQuery.of(context).size.width,
-                                MediaQuery.of(context).size.height * 0.9,
+                                MediaQuery.of(context).size.height * 0.7,
                               ),
                               autoPlay: true,
                               enlargeCenterPage: true,
