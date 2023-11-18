@@ -7,17 +7,20 @@ class LandingPage extends StatefulWidget {
     {
       "image": "affordable.png",
       "title": "Affordable",
-      "description": "Explanation about affordability"
+      "description":
+          "Top-notch features without the hefty price tag. Elevate your lifestyle on a budget!"
     },
     {
       "image": "customizeable.png",
       "title": "Customizable",
-      "description": "Explanation about customization"
+      "description":
+          "Customizable options for a personalized experience. Design your perfect match!"
     },
     {
       "image": "reuseable.png",
       "title": "Reusable",
-      "description": "Explanation about reusability"
+      "description":
+          "Ditch the disposable. Embrace reusable wonders for a stylish and eco-friendly choice."
     },
   ];
 
@@ -192,27 +195,64 @@ class _LandingPageState extends State<LandingPage> {
 
                 // 3. Our Services
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Our Services',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    color: Color.fromARGB(250, 255, 253, 208),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 20.0),
+                          child: const Text(
+                            'Our Services',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: widget.services
-                            .map((service) => _buildServiceSection(
-                                  service['image']!,
-                                  service['title']!,
-                                  service['description']!,
-                                ))
-                            .toList(),
-                      ),
-                    ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: widget.services
+                              .map((service) => Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(16.0),
+                                          constraints: BoxConstraints(
+                                            maxWidth: 400.0,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 248, 246, 246),
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                spreadRadius: 7,
+                                                blurRadius: 3,
+                                              ),
+                                            ],
+                                          ),
+                                          child: _buildServiceSection(
+                                            service['image']!,
+                                            service['title']!,
+                                            service['description']!,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -222,10 +262,16 @@ class _LandingPageState extends State<LandingPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: widget.products
-                        .map((product) => _buildProductSection(
-                              product['title']!,
-                              product['description']!,
-                            ))
+                        .asMap()
+                        .entries
+                        .map(
+                          (entry) => _buildProductSection(
+                            entry.value['title']!,
+                            entry.value['description']!,
+                            'paket${entry.key + 1}.png', // Adjust the image path accordingly
+                            400.0, // Customize the image size for each package
+                          ),
+                        )
                         .toList(),
                   ),
                 ),
@@ -351,7 +397,8 @@ class _LandingPageState extends State<LandingPage> {
                                     // If the form is valid, proceed with submission
                                     String name = _nameController.text;
                                     String email = _emailController.text;
-                                    String phoneNumber = _phoneNumberController.text;
+                                    String phoneNumber =
+                                        _phoneNumberController.text;
                                     String review = _reviewController.text;
 
                                     // Add your logic to handle the form submission
@@ -403,10 +450,17 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  Widget _buildProductSection(String title, String description) {
+  Widget _buildProductSection(
+      String title, String description, String imagePath, double imageSize) {
     return Column(
       children: [
         const SizedBox(height: 20),
+        Image.asset(
+          'images/$imagePath',
+          width: imageSize,
+          height: imageSize,
+        ),
+        const SizedBox(height: 10),
         Text(
           title,
           style: const TextStyle(
@@ -421,7 +475,7 @@ class _LandingPageState extends State<LandingPage> {
           onPressed: () {
             _launchURL('https://formfacade.com/sm/HMYxoxFEr');
           },
-          child: const Text('Learn More'),
+          child: const Text('Buy Package'),
         ),
       ],
     );
